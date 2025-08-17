@@ -7,26 +7,17 @@ export type IUser = {
   email: string;
   phone: string;
   password: string;
-  googleId?: string;
-  facebookId?: string;
-  role?: 'ADMIN' | 'USER';
-  gender?: 'MALE' | 'FEMALE' | 'OTHERS';
+  role?: 'ADMIN' | 'AGENT' | 'USER';
   image?: string;
-  age?: number;
-  height?: number;
-  weight?: number;
-  country?: string;
-  fitnessLevel?: 'BASIC' | 'INTERMEDIATE' | 'ADVANCED';
-  injury?: string;
-  payment?: boolean;
-  subscription?: boolean;
+  address?: string;
+  income?: number;
   isDeleted?: boolean;
+  verified: boolean;
   authentication?: {
     isResetPassword: boolean;
     oneTimeCode: number;
     expireAt: Date;
   };
-  verified: boolean;
 };
 
 export type UserModal = {
@@ -35,11 +26,3 @@ export type UserModal = {
   isAccountCreated(id: string): any;
   isMatchPassword(password: string, hashPassword: string): boolean;
 } & Model<IUser>;
-
-/*
-  authentication?: {
-    isResetPassword: boolean;
-    oneTimeCode: number;
-    expireAt: Date;
-  };
-  */

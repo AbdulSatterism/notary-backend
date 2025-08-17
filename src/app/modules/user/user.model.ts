@@ -22,15 +22,7 @@ const userSchema = new Schema<IUser, UserModal>(
       type: String,
       required: true,
       select: 0,
-      minlength: 8,
-    },
-    googleId: {
-      type: String,
-      unique: true,
-    },
-    facebookId: {
-      type: String,
-      unique: true,
+      minlength: 6,
     },
     phone: {
       type: String,
@@ -38,42 +30,19 @@ const userSchema = new Schema<IUser, UserModal>(
     },
     role: {
       type: String,
-      default: 'USER',
+      default: 'AGENT',
     },
     image: {
       type: String,
       default: '/default/user.jpg',
     },
-    gender: {
-      type: String,
-      enum: ['MALE', 'FEMALE', 'OTHERS'],
-    },
-    age: {
+    income: {
       type: Number,
+      default: 0,
     },
-    height: {
-      type: Number,
-    },
-    weight: {
-      type: Number,
-    },
-    country: {
+    address: {
       type: String,
-    },
-    fitnessLevel: {
-      type: String,
-      enum: ['BASIC', 'INTERMEDIATE', 'ADVANCED'],
-    },
-    injury: {
-      type: String,
-    },
-    payment: {
-      type: Boolean,
-      default: false,
-    },
-    subscription: {
-      type: Boolean,
-      default: false,
+      default: '',
     },
     isDeleted: {
       type: Boolean,
