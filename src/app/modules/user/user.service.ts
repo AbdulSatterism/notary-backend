@@ -14,11 +14,11 @@ import unlinkFile from '../../../shared/unlinkFile';
 import AppError from '../../errors/AppError';
 
 const createUserFromDb = async (payload: IUser) => {
-  payload.role = USER_ROLES.USER;
+  payload.role = USER_ROLES.AGENT;
   const result = await User.create(payload);
 
   if (!result) {
-    throw new AppError(StatusCodes.BAD_REQUEST, 'Failed to create user');
+    throw new AppError(StatusCodes.BAD_REQUEST, 'Failed to create agent');
   }
 
   const otp = generateOTP();
@@ -41,7 +41,7 @@ const createUserFromDb = async (payload: IUser) => {
     { $set: { authentication } },
   );
   if (!updatedUser) {
-    throw new AppError(StatusCodes.NOT_FOUND, 'User not found for update');
+    throw new AppError(StatusCodes.NOT_FOUND, 'Agent not found for update');
   }
 
   return result;
@@ -89,17 +89,20 @@ const updateProfileToDB = async (
   const isExistUser = await User.isExistUserById(id);
 
   if (!isExistUser) {
-    throw new AppError(StatusCodes.BAD_REQUEST, "User doesn't exist!");
-  }
-
-  if (!isExistUser) {
-    throw new AppError(StatusCodes.NOT_FOUND, 'Blog not found');
+    throw new AppError(StatusCodes.NOT_FOUND, "User doesn't exist!");
   }
 
   if (!isExistUser.verified) {
     throw new AppError(
       StatusCodes.BAD_REQUEST,
       'Please verify your account first',
+    );
+  }
+
+  if (isExistUser.isDeleted) {
+    throw new AppError(
+      StatusCodes.BAD_REQUEST,
+      'This account has been deleted',
     );
   }
 
@@ -116,6 +119,11 @@ const updateProfileToDB = async (
 
 const getSingleUser = async (id: string): Promise<IUser | null> => {
   const result = await User.findById(id);
+
+  if (!result) {
+    throw new AppError(StatusCodes.NOT_FOUND, 'User not found');
+  }
+
   return result;
 };
 

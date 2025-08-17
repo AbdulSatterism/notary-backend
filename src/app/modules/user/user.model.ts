@@ -26,7 +26,7 @@ const userSchema = new Schema<IUser, UserModal>(
     },
     phone: {
       type: String,
-      required: true,
+      default: '',
     },
     role: {
       type: String,
@@ -34,7 +34,7 @@ const userSchema = new Schema<IUser, UserModal>(
     },
     image: {
       type: String,
-      default: '/default/user.jpg',
+      default: '/public/usr.jpg',
     },
     income: {
       type: Number,
