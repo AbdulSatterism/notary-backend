@@ -15,7 +15,11 @@ router.post(
   UserController.createUser,
 );
 
-router.get('/all-user', auth(USER_ROLES.ADMIN), UserController.getAllUser);
+router.get(
+  '/all-user',
+  auth(USER_ROLES.ADMIN, USER_ROLES.AGENT),
+  UserController.getAllUser,
+);
 
 router.patch(
   '/update-profile',
@@ -31,7 +35,7 @@ router.patch(
 
 router.get(
   '/user',
-  auth(USER_ROLES.ADMIN, USER_ROLES.USER),
+  auth(USER_ROLES.ADMIN, USER_ROLES.AGENT, USER_ROLES.USER),
   UserController.getUserProfile,
 );
 
@@ -39,20 +43,20 @@ router.get(
 
 router.get(
   '/get-single-user/:id',
-  auth(USER_ROLES.ADMIN),
+  auth(USER_ROLES.ADMIN, USER_ROLES.AGENT, USER_ROLES.USER),
   UserController.getSingleUser,
 );
 
 // get user by search by phone
 router.get(
   '/user-search',
-  auth(USER_ROLES.ADMIN, USER_ROLES.USER),
+  auth(USER_ROLES.ADMIN, USER_ROLES.AGENT, USER_ROLES.USER),
   UserController.searchByPhone,
 );
 
 router.get(
   '/profile',
-  auth(USER_ROLES.ADMIN, USER_ROLES.USER),
+  auth(USER_ROLES.ADMIN, USER_ROLES.AGENT, USER_ROLES.USER),
   UserController.getUserProfile,
 );
 
