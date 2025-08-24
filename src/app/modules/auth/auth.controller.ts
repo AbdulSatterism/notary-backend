@@ -108,41 +108,39 @@ const newAccessToken = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
-const resendVerificationEmail = catchAsync(
-  async (req: Request, res: Response) => {
-    const { email } = req.body;
-    const result = await AuthService.resendVerificationEmailToDB(email);
-
-    sendResponse(res, {
-      success: true,
-      statusCode: StatusCodes.OK,
-      message: 'Generate OTP and send successfully',
-      data: result,
-    });
-  },
-);
-
-const googleLogin = catchAsync(async (req: Request, res: Response) => {
-  const result = await AuthService.googleLogin(req.body);
+const resendOTP = catchAsync(async (req: Request, res: Response) => {
+  const { email } = req.body;
+  const result = await AuthService.resendOTP(email);
 
   sendResponse(res, {
     success: true,
     statusCode: StatusCodes.OK,
-    message: 'User login successfully',
+    message: 'OTP sent successfully',
     data: result,
   });
 });
 
-const facebookLogin = catchAsync(async (req: Request, res: Response) => {
-  const result = await AuthService.facebookLogin(req.body);
+// const googleLogin = catchAsync(async (req: Request, res: Response) => {
+//   const result = await AuthService.googleLogin(req.body);
 
-  sendResponse(res, {
-    success: true,
-    statusCode: StatusCodes.OK,
-    message: 'User login successfully',
-    data: result,
-  });
-});
+//   sendResponse(res, {
+//     success: true,
+//     statusCode: StatusCodes.OK,
+//     message: 'User login successfully',
+//     data: result,
+//   });
+// });
+
+// const facebookLogin = catchAsync(async (req: Request, res: Response) => {
+//   const result = await AuthService.facebookLogin(req.body);
+
+//   sendResponse(res, {
+//     success: true,
+//     statusCode: StatusCodes.OK,
+//     message: 'User login successfully',
+//     data: result,
+//   });
+// });
 
 export const AuthController = {
   verifyEmail,
@@ -152,7 +150,5 @@ export const AuthController = {
   changePassword,
   deleteAccount,
   newAccessToken,
-  resendVerificationEmail,
-  googleLogin,
-  facebookLogin,
+  resendOTP,
 };

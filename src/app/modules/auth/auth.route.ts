@@ -26,7 +26,7 @@ router.post(
   AuthController.verifyEmail,
 );
 
-router.post('/resend-otp', AuthController.resendVerificationEmail);
+router.post('/resend-otp', AuthController.resendOTP);
 
 router.post(
   '/reset-password',
@@ -47,7 +47,7 @@ router.post(
   AuthController.changePassword,
 );
 
-router.post('/google-login', AuthController.googleLogin);
-router.post('/facebook-login', AuthController.facebookLogin);
+// router.post('/google-login', AuthController.googleLogin);
+// router.post('/facebook-login', AuthController.facebookLogin);
 
 export const AuthRoutes = router;
