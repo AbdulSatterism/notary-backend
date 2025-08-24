@@ -63,9 +63,7 @@ const getAllUsers = async (query: Record<string, unknown>) => {
 
   return {
     result,
-    totalData: count,
-    page: pages,
-    limit: size,
+    meta: { totalData: count, page: pages, limit: size },
   };
 };
 
