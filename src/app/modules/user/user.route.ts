@@ -20,7 +20,7 @@ router.get('/all-user', auth(USER_ROLES.ADMIN), UserController.getAllUser);
 router.patch(
   '/update-profile',
   fileUploadHandler(),
-  auth(USER_ROLES.USER, USER_ROLES.ADMIN),
+  auth(USER_ROLES.USER, USER_ROLES.AGENT, USER_ROLES.ADMIN),
   (req: Request, res: Response, next: NextFunction) => {
     req.body = JSON.parse(req.body.data);
     next();
